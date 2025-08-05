@@ -23,7 +23,10 @@ def get_mlb_data():
         return pd.DataFrame()
 
     return df
-
+# Test loading the data
+df = get_mlb_data()
+st.write("Preview of loaded MLB data:")
+st.dataframe(df)
 
 # ------------------------------------------------------------
 # Draw the actual page
