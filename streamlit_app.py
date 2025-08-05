@@ -5,7 +5,7 @@ from pathlib import Path
 
 # Set the title and favicon that appear in the Browser's tab bar.
 st.set_page_config(
-    page_title='GDP dashboard',
+    page_title='MLB Betting Ai',
     page_icon=':earth_americas:', # This is an emoji shortcode. Could be a URL too.
 )
 
@@ -13,8 +13,18 @@ st.set_page_config(
 # Declare some useful functions.
 
 @st.cache_data
-def get_gdp_data():
-    """Grab GDP data from a CSV file.
+def get_mlb_data():
+    """Load MLB game data from a CSV or API."""
+    # Example placeholder path — change to actual data location
+    DATA_FILENAME = Path(__file__).parent / 'data' / 'mlb_games.csv'
+    
+    try:
+        df = pd.read_csv(DATA_FILENAME)
+    except FileNotFoundError:
+        st.error("MLB data file not found.")
+        return pd.DataFrame()
+    
+    return df
 
     This uses caching to avoid having to read the file every time. If we were
     reading from an HTTP endpoint instead of a file, it's a good idea to set
